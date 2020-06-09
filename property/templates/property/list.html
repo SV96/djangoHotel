@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+
+
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="#">Home</a><span>Properties</span>
+              </div>
+              <h1>Properties</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url(img/slider_1.jpg);"></li>
+      <li style="background-image: url(img/slider_4.jpg);"></li>
+      <li style="background-image: url(img/slider_2.jpg);"></li>
+    </ul>
+  </section>
+  <!-- END: slider  -->
+
+  <section class="probootstrap-section probootstrap-section-lighter">
+    <div class="container">
+      <div class="row">
+        {% if property_list %}
+           {% for property in property_list %}
+          <div class="col-md-4 col-sm-6">
+            <div class="probootstrap-card probootstrap-listing"  style="width:370;height:580">
+              <div class="probootstrap-card-media">
+                <img src="{{ property.image.url }}" class="img-responsive" alt="Free HTML5 Template by uicookies.com">
+                <a href="#" class="probootstrap-love"><i class="icon-heart"></i></a>
+              </div>
+              <div class="probootstrap-card-text">
+                <h2 class="probootstrap-card-heading"><a href="{% url 'property:property_detail' property.id %}">{{ property }}</a></h2>
+                <div class="probootstrap-listing-location">
+                  <i class="icon-location2"></i> <span>{{ property.location }}</span>
+                </div>
+                <div class="probootstrap-listing-category for-sale"><span>{{ property.property_type }}</span></div>
+                <div class="probootstrap-listing-price">$ <strong>{{ property.price }} </strong> {{ property.price_type }}</div>
+              </div>
+              <div class="probootstrap-card-extra">
+                <ul>
+                  <li>
+                    Area
+                    <span>{{ property.area }}</span>
+                  </li>
+                  <li>
+                    Beds
+                    <span>{{ property.bed_number }}</span>
+                  </li>
+                  <li>
+                    Baths
+                    <span>{{ property.bath_number }}</span>
+                  </li>
+                  <li>
+                    Garages
+                    <span>{{ property.garages_number }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- END listing -->
+          </div>
+        {% endfor %}
+        {% else %}
+           <div class="col-md-4 col-sm-10">
+             <h3>No properties with this Name or Type</h3>
+           </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  
+
+
+
+{% endblock body %}
+
